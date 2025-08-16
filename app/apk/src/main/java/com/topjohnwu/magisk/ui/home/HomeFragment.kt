@@ -1,5 +1,6 @@
 package com.topjohnwu.magisk.ui.home
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -7,6 +8,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.MenuProvider
@@ -49,7 +51,6 @@ class HomeFragment : BaseFragment<FragmentHomeMd2Binding>(), MenuProvider {
         savedInstanceState: Bundle?
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
-
         // If titles are squished, hide icons
         with(binding.homeMagiskWrapper) {
             checkTitle(homeMagiskTitle, homeMagiskIcon)
@@ -57,6 +58,10 @@ class HomeFragment : BaseFragment<FragmentHomeMd2Binding>(), MenuProvider {
         with(binding.homeManagerWrapper) {
             checkTitle(homeManagerTitle, homeManagerIcon)
         }
+        //if device is quest then disable install button for safety
+        // (because installing magisk will brick on the device)
+        val installButton: FrameLayout = binding.root.findViewById(R.id.home_magisk_button)
+        installButton.visibility = if (Build.MODEL == "Quest") View.GONE else View.VISIBLE
 
         return binding.root
     }
