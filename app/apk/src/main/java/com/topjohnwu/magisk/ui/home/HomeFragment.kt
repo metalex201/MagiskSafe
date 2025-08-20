@@ -51,6 +51,7 @@ class HomeFragment : BaseFragment<FragmentHomeMd2Binding>(), MenuProvider {
         savedInstanceState: Bundle?
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
+
         // If titles are squished, hide icons
         with(binding.homeMagiskWrapper) {
             checkTitle(homeMagiskTitle, homeMagiskIcon)
@@ -61,7 +62,7 @@ class HomeFragment : BaseFragment<FragmentHomeMd2Binding>(), MenuProvider {
         //if device is quest then disable install button for safety
         // (because installing magisk will brick on the device)
         val installButton: FrameLayout = binding.root.findViewById(R.id.home_magisk_button)
-        installButton.visibility = if (Build.MODEL == "Quest") View.GONE else View.VISIBLE
+        installButton.visibility = if (Build.MODEL.startsWith("Quest")) View.GONE else View.VISIBLE
 
         return binding.root
     }
