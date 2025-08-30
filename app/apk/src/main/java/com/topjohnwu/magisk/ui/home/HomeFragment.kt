@@ -59,10 +59,6 @@ class HomeFragment : BaseFragment<FragmentHomeMd2Binding>(), MenuProvider {
         with(binding.homeManagerWrapper) {
             checkTitle(homeManagerTitle, homeManagerIcon)
         }
-        // If device is META Quest then disable install button for safety
-        // (because installing magisk will brick on the device)
-        val installButton: FrameLayout = binding.root.findViewById(R.id.home_magisk_button)
-        installButton.visibility = if (Build.MODEL.startsWith("Quest")) View.GONE else View.VISIBLE
 
         return binding.root
     }

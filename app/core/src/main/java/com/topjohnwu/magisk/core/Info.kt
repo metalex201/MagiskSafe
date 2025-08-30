@@ -33,7 +33,22 @@ object Info {
         update = EMPTY_UPDATE
     }
 
+    fun getSystemProperty(propName: String): String {
+        return try {
+            val process = Runtime.getRuntime().exec("getprop $propName")
+            process.inputStream.bufferedReader().use { it.readLine() ?: "" }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            ""
+        }
+    }
+
     var isRooted = false
+
+    var isQFPROM =
+        getSystemProperty("ro.boot.flash.locked") == "1"
+            || getSystemProperty("ro.boot.veritymode") == "enforcing"
+
     var noDataExec = false
     var patchBootVbmeta = false
 
