@@ -45,7 +45,7 @@ object Info {
 
     var isRooted = false
 
-    var isQFPROM =
+    var isLockedOrAVBEnforcing =
         getSystemProperty("ro.boot.flash.locked") == "1"
             || getSystemProperty("ro.boot.veritymode") == "enforcing"
 
