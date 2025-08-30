@@ -36,7 +36,7 @@ import com.topjohnwu.magisk.core.R as CoreR
 
 class InstallViewModel(svc: NetworkService, markwon: Markwon) : BaseViewModel() {
 
-    val isRooted get() = Info.isRooted || Info.isQFPROM
+    val isRooted get() = Info.isRooted && !Info.isQFPROM
     val skipOptions = Info.isEmulator || (Info.isSAR && !Info.isFDE && Info.ramdisk)
     val noSecondSlot = !isRooted || !Info.isAB || Info.isEmulator
 
